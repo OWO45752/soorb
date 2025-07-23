@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import nyancat from "../assets/nyancat.svg";
+import { useNavigate } from "react-router";
 
 const NotFound = () => {
+    const navigate = useNavigate();
+    const [t, setT] = useState(5);
+
+    React.useEffect(() => {
+        const i = setInterval(() => {
+            setT((t) => t - 1);
+        }, 1000);
+
+        return () => { clearInterval(i); };
+    }, []);
+
+    React.useEffect(() => {
+        if (t <= 0) navigate("/");
+    }, [t]);
+
     return (
         <div style={{
             width: "100%",
@@ -14,10 +30,11 @@ const NotFound = () => {
             alignItems: "center",
         }}
         >
-            <h1>No Found Naja UwU</h1>
+            <h1>Page not found 404</h1>
+            <p>Weiterleitung zur Startseite in {t} Sekunden</p>
             <img src={nyancat} style={{
                 maxWidth: "90vw",
-                maxHeight: "85vh",
+                maxHeight: "80vh",
                 objectFit: "cover",
                 objectPosition: "center",
             }}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card } from "antd";
+import { Card, Col, Image, Row } from "antd";
 const { Meta } = Card;
 
 /**
@@ -21,13 +21,15 @@ const { Meta } = Card;
  * @param {{p: Produk}} props
  * @returns
  */
-const CardX = (props) => <Card
-    hoverable
-    style={{ width: 240 }}
-    cover={<img alt="OWO" src={props.p.image} />}
->
-    <Meta title={props.p.title} description={props.p.description} />
-</Card>;
+const CardX = (props) => <Col span={6}>
+    <Card
+        hoverable
+        style={{ width: 240 }}
+        cover={<Image alt="OWO" src={props.p.image} />}
+    >
+        <Meta title={props.p.title} description={props.p.description} />
+    </Card>
+</Col>;
 
 const FetchAPI = () => {
     /**
@@ -46,15 +48,9 @@ const FetchAPI = () => {
     }, []);
 
     return (
-        <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "row",
-            gap: "1rem",
-        }}
-        >
+        <Row>
             {data.map((e) => <CardX p={e} />)}
-        </div>
+        </Row>
     );
 };
 
